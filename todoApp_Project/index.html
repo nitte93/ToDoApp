@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app= "app">
+  <head>
+    <title>My Angular App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+  	 .a{
+  	 	color:red;
+  	 }
+  	 .done{
+  	 		text-decoration: line-through;
+  	 		color: #CCC;
+  	 }
+  	</style>
+
+  </head>
+ <body>
+
+  <div>
+    <!-- updated to use recommended 'controller as' approach -->
+    <!-- we've replaced the use of $scope with the preferred "controller as" syntax. see: http://toddmotto.com/digging-into-angulars-controller-as-syntax/-->
+    <div ng-controller="FirstCtrl as first">
+    	{{first.name}}'s first todo app.
+    	<!--<button ng-click="first.addTodo()">Alert</button>
+
+   		<div ng-repeat= "contact in first.contacts">
+   			{{contact}}
+   		</div>	
+        <div ng-repeat="country in first.countries">
+        	{{country.name}} has population of {{country.population}}
+    	</div>
+    	-->
+    	<form name="todoForm" ng-submit="first.addTodo()">
+    		<input type="text" name="newtodo" ng-model="first.newtodo" required />
+    		<button ng-disabled="todoForm.$invalid">Add</button>
+    	</form>
+    	<span>Incomplete todo List</span>
+    	<ul>
+    		<li ng-repeat="todo in first.todos | filter:{done:false}">
+    			<input type="checkbox" ng-model="todo.done" />
+    			<span ng-class="{'done': todo.done}">{{todo.title}}</span>
+    		</li>
+    	</ul>
+    	<span>Completed todo List</span>
+    	<ul>
+    		<li ng-repeat="todo in first.todos | filter:{done:true}">
+    			<input type="checkbox" ng-model="todo.done" />
+    			<span ng-class="{'done': todo.done}">{{todo.title}}</span>
+    		</li>
+    	</ul>
+
+    </div>
+
+</body>
+</html>
+
